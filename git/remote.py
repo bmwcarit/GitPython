@@ -585,6 +585,10 @@ class Remote(LazyMixin, Iterable):
             # expecting
             # * [would prune] origin/new_branch
             token = " * [would prune] "
+            # Valid output also can be
+            # <ref> will become dangling!
+            if 'will become dangling!' in line:
+                continue
             if not line.startswith(token):
                 raise ValueError("Could not parse git-remote prune result: %r" % line)
             ref_name = line.replace(token, "")
