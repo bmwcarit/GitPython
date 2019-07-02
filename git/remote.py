@@ -742,6 +742,10 @@ class Remote(LazyMixin, IterableObj):
             # expecting
             # * [would prune] origin/new_branch
             token = " * [would prune] "
+            # Valid output also can be
+            # <ref> will become dangling!
+            if 'will become dangling!' in line:
+                continue
             if not line.startswith(token):
                 continue
             ref_name = line.replace(token, "")
